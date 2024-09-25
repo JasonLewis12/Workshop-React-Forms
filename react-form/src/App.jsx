@@ -4,10 +4,11 @@ import "./App.css";
 import Authenticator from "./components/Authenticate";
 
 function App() {
+  const [token, setToken] = useState(null);
   return (
     <div>
-      <SignUpForm />
-      <Authenticator />
+      <SignUpForm setToken={setToken} />
+      <Authenticator token={token} />
     </div>
   );
 }

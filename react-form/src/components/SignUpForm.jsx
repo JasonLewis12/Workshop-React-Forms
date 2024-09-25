@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export default function signUpForm() {
+export default function signUpForm({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -23,7 +23,8 @@ export default function signUpForm() {
         }
       );
       const data = await repoonse.json();
-      console.log(data);
+      console.log(data.token);
+      setToken(data.token);
     } catch (error) {
       console.error("there was in error in your POST", error);
     }
