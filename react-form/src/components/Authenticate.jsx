@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function Authenticator({ token }) {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [name, setName] = useState(null);
 
   async function handleClick() {
     try {
@@ -18,17 +19,18 @@ export default function Authenticator({ token }) {
         }
       );
       const data = await response.json();
-      setSuccessMessage(data.message);
       console.log(data);
+      setSuccessMessage(data.message);
+      setName(data.data.username);
     } catch (error) {
       console.log("there was an error in the Auth", error);
       setError(error);
     }
   }
-
   return (
     <div>
       {successMessage && <p>{successMessage}</p>}
+      {name && <p> welcome back {name}</p>}
       {error && <p>{error}</p>}
       <button onClick={handleClick}>Authenticate Token</button>
     </div>
